@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/default.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="sidebar">
+    <div class="container">
+        <div class="sidebar__iner">
+            <div class="sidebar__logo">Play RPG</div>
+                <nav class="nav">
+                    <a class="nav__link" href="/ads">Ads</a>
+                    <a class="nav__link" href="/contact/">Contact</a>
+
+                    <a class="nav__link" href="/accounts/profile/">Profile</a>
+                    <a class="nav__link" href="#">🔍</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+<!-- Page content-->
+<div class="container">
+    <div class="row">
+           {% block content %}
+           {{ flatpage.content }}
+           {% endblock content %}
+   </div>
+</div>

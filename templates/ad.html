@@ -1,0 +1,20 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+    Detail Ad
+{% endblock title %}
+{% block content %}
+
+    <div class="wrapper">
+        <div class="title">{{ ad.tittle }}</div>
+        <div class="content">{{ ad.content|safe }}</div>
+
+        <div class="detail">
+            <p>Author: {{ ad.author }}</p>
+            <p>{{ ad.time_create }}</p>
+        </div>
+        <a href="/ads/" class="btn__delete">Back</a>
+        <a href='/ads/{{ ad.get_absolute_url }}/reply' class="btn__aprove">Reply</a>
+    </div>
+
+
+{% endblock content %}

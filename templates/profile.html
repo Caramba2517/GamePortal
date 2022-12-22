@@ -1,0 +1,59 @@
+{% extends 'flatpages/default.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<body>
+    <div class="container">
+        <div class="headline">
+            <h2>Authorized user profile</h2>
+            <hr>
+        </div>
+
+        <div class="PG_User">
+            <p>
+                Hello, {{ request.user.username }}!
+
+            </p>
+        </div>
+        <div class="txt">
+        <p>
+
+        <form method="get" action="{% url 'profile' %}">
+                    {{ form.as_p }}
+            <input type="submit" value="Search" class='btn' />
+        </form>
+        </div>
+        <div class="wrapper">
+            {%  if replies %}
+                <table class="table_col">
+                    <colgroup>
+                        <col style="background: rgba(255, 111, 0, 0.69)">
+                    </colgroup>
+                    <tr>
+                        <th>Ad</th>
+                        <th>Reply comment</th>
+                        <th>Reply author</th>
+                        <th> </th>
+                        <th> </th>
+                        </tr>
+
+                    {% for reply in replies %}
+                    <tr>
+                        <td>{{ reply.ad }}</td>
+                        <td>{{ reply.comment }}</td>
+                        <td>{{ reply.author }}</td>
+                        <td><a href="#" class="btn__aprove">Aprove</a></td>
+                        <td><a href="/ads/reply/{{ reply.get_absolute_url }}/delete" class="btn__delete">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+            {% else %}
+                <h2>No reply</h2>
+            {% endif %}
+            </table>
+
+
+
+
+
+        </div>
+    </div>
+{% endblock %}

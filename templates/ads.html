@@ -1,0 +1,63 @@
+{% extends 'flatpages/default.html' %}
+    {% block content %}
+        <div class="header">
+            <h2>All Ads</h2>
+            <div class="header__iner">
+            <hr>
+                <p>Here are the ads. <p>
+                <p>You can choose the ones that suit you. By clicking "Look more" you can respond to the ad you are interested in by leaving a comment (indicate important information in the comment).</p>
+                <p>If the seller is interested in your response, you will receive a notification by e-mail.</p>
+            <hr>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            {% if ads %}
+                <table class="table_col">
+                    <colgroup>
+                        <col style="background: rgba(255, 111, 0, 0.69)">
+                    </colgroup>
+                <tr>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Detail</th>
+                    </tr>
+                    {% for ad in ads %}
+                    <tr>
+                        <td>{{ ad.get_category_display }} </td>
+                        <td>{{ ad.tittle }} </td>
+                        <td>{{ ad.author }} </td>
+                        <td><a class="link" href="/ads/{{ ad.get_absolute_url }}" >Look more</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
+    <div class ="paginator">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">1</a>
+            {% if page_obj.previous_page_number != 1 %}
+                ...
+                <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+            {% endif %}
+        {% endif %}
+
+   {# Информация о текущей странице #}
+        {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+            {% if paginator.num_pages != page_obj.next_page_number %}
+                ...
+                <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
+        {% endif %}
+
+
+        </div>
+    </div>
+</div>
+
+    {% endblock content %}
