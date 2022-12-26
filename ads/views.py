@@ -2,10 +2,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, DeleteView, UpdateView
+from django.views.generic.edit import ModelFormMixin
+
 from .models import Ads, Reply
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
-from ads.forms import AdsForm, ReplyForm
+from ads.forms import AdsForm, ReplyForm, AproveForm
+
 
 # Create your views here.
 
@@ -50,9 +53,28 @@ def create_ad(request):
     return render(request, 'ads_edit.html', {'form': form})
 
 
-class ReplayDetail(LoginRequiredMixin, DetailView):
+class Aprove(LoginRequiredMixin, ModelFormMixin, DetailView):
     model = Reply
-    context_object_name = 'reply'
+    context_object_name = 'aprove'
+    form_class = AproveForm
+    template_name = 'aprove.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Aprove, self).get_context_data(**kwargs)
+        context['form'] = self.get_form()
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            form.save()
+            return redirect('/accounts/profile')
+        else:
+            return self.form_invalid(form)
+
+
 
 
 class ReplyDelete(LoginRequiredMixin, DeleteView):
@@ -60,4 +82,3 @@ class ReplyDelete(LoginRequiredMixin, DeleteView):
     template_name = 'reply_delete.html'
     context_object_name = 'reply_delete'
     success_url = reverse_lazy('profile')
-

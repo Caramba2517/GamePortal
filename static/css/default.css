@@ -281,3 +281,7 @@ color: #8b8e91;
     transition: color .3s linear, color .3s linear;
 
 }
+
+.aproved{
+    color: rgba(29, 248, 4, 0.6);
+}

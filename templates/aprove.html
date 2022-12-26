@@ -1,0 +1,24 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+    Detail Ad
+{% endblock title %}
+{% block content %}
+
+    <div class="wrapper">
+        <div class="title">{{ aprove.comment }}</div>
+        <div class="content">{{ aprove.author}}</div>
+
+        <div class="detail">
+            <form action= "" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="btn__aprove" value="Aprove">
+            </form>
+
+        </div>
+        <a href="/accounts/profile/" class="btn__delete">Back</a>
+
+    </div>
+
+
+{% endblock content %}

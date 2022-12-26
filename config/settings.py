@@ -174,3 +174,11 @@ EMAIL_HOST = "app.debugmail.io"
 EMAIL_HOST_USER = "9ad6e334-8ebe-4613-93ef-eecbf8837412"
 EMAIL_HOST_PASSWORD = "548d3c15-4c89-4ea4-ae30-b367c7c95509"
 EMAIL_PORT = "25"
+
+
+CELERY_IMPORTS = 'ads.tasks'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

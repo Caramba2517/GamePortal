@@ -23,3 +23,10 @@ class ReplyForm(ModelForm):
     class Meta:
         model = Reply
         fields = ['comment', 'check_box']
+
+
+class AproveForm(ModelForm):
+    class Meta:
+        model = Reply
+        fields = ['aprove']
+

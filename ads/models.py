@@ -39,6 +39,7 @@ class Reply(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     ad = models.ForeignKey(Ads, on_delete=models.CASCADE)
     comment = models.TextField(max_length=144)
+    aprove = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.comment}'

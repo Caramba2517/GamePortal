@@ -1,5 +1,5 @@
-from django_filters import FilterSet, CharFilter, DateFilter, ModelChoiceFilter, BooleanFilter
-from ads.models import Ads, Reply, User
+from django_filters import ChoiceFilter, FilterSet, CharFilter, DateFilter, ModelChoiceFilter, BooleanFilter
+from ads.models import Ads, Reply, User, Category
 
 
 def req_reply(request):
@@ -10,10 +10,17 @@ def req_reply(request):
 
 
 class ReplyFilter(FilterSet):
-    ad = ModelChoiceFilter(queryset=req_reply)
+    ad = ChoiceFilter()
 
     class Meta:
         model = Reply
-        fields = {'ad': ['exact']}
+        fields = ['ad']
 
+    def __init__(self, *args, **kwargs):
+        super(ReplyFilter, self).__init__(*args, **kwargs)
+        self.filters['ad'].extra.update(
+            {
+                'choices': kwargs['request']
+            }
+        )
 

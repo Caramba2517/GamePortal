@@ -41,7 +41,11 @@
                         <td>{{ reply.ad }}</td>
                         <td>{{ reply.comment }}</td>
                         <td>{{ reply.author }}</td>
-                        <td><a href="#" class="btn__aprove">Aprove</a></td>
+                        {% if reply.aprove == 0 %}
+                            <td><a href={% url 'aprove' reply.pk %} class="btn__aprove">Aprove</a></td>
+                        {% else %}
+                            <td><a class="aproved">Aproved!</a></td>
+                        {% endif %}
                         <td><a href="/ads/reply/{{ reply.get_absolute_url }}/delete" class="btn__delete">Delete</a></td>
                         </tr>
                     {% endfor %}
